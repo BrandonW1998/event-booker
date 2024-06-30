@@ -20,6 +20,6 @@ View of all event that have been booked.
 - Location
 - Organizer
 
-#### Project Stats
+## Project Stats
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), along with styles from [Tailwind.css](https://tailwindcss.com/).
