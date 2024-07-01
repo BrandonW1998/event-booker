@@ -31,3 +31,17 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer components {
+  label {
+    @apply block text-xs uppercase font-semibold mb-2;
+  }
+  input,
+  textarea {
+    @apply bg-transparent py-3 px-6 text-white placeholder-neutral-600 border border-neutral-600 rounded-lg w-full;
+  }
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
