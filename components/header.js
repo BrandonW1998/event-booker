@@ -5,7 +5,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { title: "Home", url: "/" },
+  { title: "Events", url: "/" },
   { title: "Booked Events", url: "/booked-events" },
   { title: "New Events", url: "/new-event" },
 ];
@@ -16,9 +16,7 @@ export default function Header() {
   return (
     <>
       <header className="flex items-center justify-between p-6 flex-wrap gap-4">
-        <div className="font-bold hidden md:block">
-          Event Booking and Creation
-        </div>
+        <div className="font-bold hidden md:block">Event Booker</div>
         <nav>
           <ul className="flex items-center justify-center gap-4 flex-wrap">
             {links.map((link) => (
