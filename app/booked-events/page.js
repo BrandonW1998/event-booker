@@ -13,7 +13,7 @@ export default function BookedEvents() {
   return (
     <>
       <section className="max-w-6xl mx-auto py-10 px-6">
-        <h2 className="font-bold text-4xl mb-8">Booked Events</h2>
+        <h2 className="font-bold text-4xl text-center mb-8">Booked Events</h2>
 
         {bookedEvents.length === 0 ? (
           <p className="text-neutral-600">No booked events available</p>
