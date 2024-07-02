@@ -8,25 +8,28 @@ export default function Home() {
   const [eventList, setEventList] = useState([]);
 
   useEffect(() => {
-    const events = JSON.parse(localStorage.getItem("events") || "[]");
+    // Get events from local storage if it exists
+    let events;
+    events = JSON.parse(localStorage.getItem("events") || "[]");
     setEventList(events);
   }, []);
 
-  const bookedEvents = JSON.parse(localStorage.getItem("bookedEvents")) || [];
-
   function handleBookEvent(event) {
-    // Check if event already booked
+    // Load current booked events
+    const bookedEvents = JSON.parse(localStorage.getItem("bookedEvents")) || [];
+    // If event already booked, display error
     if (
       bookedEvents.find((e) => e.name === event.name && e.date === event.date)
     ) {
       toast.error("Event has already been booked");
       return;
     }
-
-    // Book event
-    const updateBookedEvents = [...bookedEvents, event];
-    localStorage.setItem("bookedEvents", JSON.stringify(updateBookedEvents));
-    toast.success("Event successfully booked");
+    // If not booked, update booked events, display success
+    else {
+      const updateBookedEvents = [...bookedEvents, event];
+      localStorage.setItem("bookedEvents", JSON.stringify(updateBookedEvents));
+      toast.success("Event successfully booked");
+    }
   }
 
   return (
@@ -61,7 +64,7 @@ export default function Home() {
                   onClick={() => handleBookEvent(event)}
                   className="py-2 px-4 rounded-lg bg-neutral-900 hover:bg-neutral-800 transition text-sm text-neutral-400 font-semibold"
                 >
-                  Book now
+                  Book event
                 </button>
               </div>
             ))}
