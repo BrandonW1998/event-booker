@@ -74,7 +74,8 @@ export default function NewEvent() {
             <div>
               <label htmlFor="event-date">Event Date</label>
               <input
-                type="date"
+                // !!! TODO Change back to date !!!
+                type="text"
                 name="event-date"
                 id="event-date"
                 required
