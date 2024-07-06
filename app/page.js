@@ -9,8 +9,7 @@ export default function Home() {
 
   useEffect(() => {
     // Get events from local storage if it exists
-    let events;
-    events = JSON.parse(localStorage.getItem("events") || "[]");
+    const events = JSON.parse(localStorage.getItem("events") || "[]");
     setEventList(events);
   }, []);
 
@@ -18,9 +17,7 @@ export default function Home() {
     // Load current booked events
     const bookedEvents = JSON.parse(localStorage.getItem("bookedEvents")) || [];
     // If event already booked, display error
-    if (
-      bookedEvents.find((e) => e.name === event.name && e.date === event.date)
-    ) {
+    if (bookedEvents.find((e) => e.id === event.id)) {
       toast.error("Event has already been booked");
       return;
     }
@@ -30,6 +27,23 @@ export default function Home() {
       localStorage.setItem("bookedEvents", JSON.stringify(updateBookedEvents));
       toast.success("Event successfully booked");
     }
+  }
+
+  function handleDeleteEvent(event) {
+    // Load current events
+    let currEvents = JSON.parse(localStorage.getItem("events")) || [];
+
+    // Find event in currEvents list
+    for (const i in currEvents) {
+      if (currEvents[i].id === event.id) {
+        currEvents.splice(i, 1);
+        localStorage.setItem("events", JSON.stringify(currEvents));
+        toast.success("Event successfully deleted");
+        return;
+      }
+    }
+    toast.error("Event has already been deleted, refresh page to update");
+    return;
   }
 
   return (
@@ -60,12 +74,21 @@ export default function Home() {
                   </li>
                 </ul>
 
-                <button
-                  onClick={() => handleBookEvent(event)}
-                  className="py-2 px-4 rounded-lg bg-neutral-900 hover:bg-neutral-800 transition text-sm text-neutral-400 font-semibold"
-                >
-                  Book event
-                </button>
+                <ul className="flex flex-wrap items-center justify-between gap-4">
+                  <button
+                    onClick={() => handleBookEvent(event)}
+                    className="py-2 px-4 rounded-lg bg-neutral-900 hover:bg-neutral-800 transition text-sm text-neutral-400 font-semibold"
+                  >
+                    Book event
+                  </button>
+
+                  <button
+                    onClick={() => handleDeleteEvent(event)}
+                    className="py-2 px-4 rounded-lg bg-neutral-900 hover:bg-neutral-800 transition text-sm text-neutral-400 font-semibold"
+                  >
+                    Delete event
+                  </button>
+                </ul>
               </div>
             ))}
           </div>
